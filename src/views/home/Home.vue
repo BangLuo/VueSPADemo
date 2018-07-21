@@ -5,7 +5,7 @@
         <el-col :span="4"><div class="grid-content bg-purple"><img src="" alt=""></div></el-col>
         <el-col :span="16"><div class="grid-content bg-purple"><h2>电商后台管理</h2></div></el-col>
 
-        <el-col :span="4"><div class="grid-content bg-purple loginout"><a href="#">退出</a></div></el-col>
+        <el-col :span="4"><div class="grid-content bg-purple loginout"><a href="#" @click.prevent="logout">退出</a></div></el-col>
       </el-row>
     </el-header>
     <el-container>
@@ -17,7 +17,33 @@
 
 <script>
 export default {
+  data () {
+    return {
 
+    }
+  },
+  methods: {
+    logout () {
+      this.$confirm('确认退出吗?', '退出提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => { // 点击确认执行 resolve 函数
+        // 1. 删除本地存储中的 Token 身份标识
+        window.localStorage.removeItem('token')
+        // 2. 跳转到登陆视图
+        this.$router.push({
+          name: 'login'
+        })
+        this.$message({
+          type: 'success',
+          message: '退出成功!'
+        })
+      }).catch(() => {
+        // 点击取消的处理
+      })
+    }
+  }
 }
 </script>
 

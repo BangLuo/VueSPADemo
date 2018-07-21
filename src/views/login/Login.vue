@@ -31,14 +31,14 @@ export default {
   methods: {
     async submitLoginForm () {
       const {data: resData} = await this.$http.post('http://localhost:8888/api/private/v1/login', this.ruleForm2)
-      const { data, meta: {status, msg}} = resData;
-      console.log(resData);
+      const {data, meta: {status, msg}} = resData
+      console.log(resData)
       if (status === 200) {
-        this.$message.success(msg);
-        window.localStorage.setItem('token', data.token);
-        this.$router.push({name: 'home'});
+        this.$message.success(msg)
+        window.localStorage.setItem('token', data.token)
+        this.$router.push({name: 'home'})
       } else {
-        this.$message.warning(msg);
+        this.$message.warning(msg)
       }
     }
   }
